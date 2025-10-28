@@ -1,0 +1,16 @@
+# theme = Catppuccin Mocha
+# theme = Gruvbox Dark
+theme = Rose Pine Moon
+# theme = Gruvbox Material Dark
+# theme = TokyoNight Moon
+# theme = Dracula+
+# theme = Liquid Carbon Transparent
+# font-family = Meslo LGS Nerd Font Mono
+# font-family = CaskaydiaMono Nerd Font
+# font-family = CaskaydiaCove Nerd Font
+font-family = "FiraCode Nerd Font"
+font-size = 14
+background-opacity = 0.92
+# gtk-titlebar = false
+# custom-shader = /home/chris/bloom.glsl
+#custom-shader = /home/chris/crt.glsl
