@@ -1,8 +1,8 @@
 # theme = Catppuccin Mocha
 # theme = Gruvbox Dark
-theme = Rose Pine Moon
+# theme = Rose Pine Moon
 # theme = Gruvbox Material Dark
-# theme = TokyoNight Moon
+theme = TokyoNight Night
 # theme = Dracula+
 # theme = Liquid Carbon Transparent
 # font-family = Meslo LGS Nerd Font Mono

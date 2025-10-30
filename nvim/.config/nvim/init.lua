@@ -47,6 +47,7 @@ require('lazy').setup({
   require 'custom.plugins.gitsigns',
   require 'custom.plugins.whichkey',
   require 'custom.plugins.treesitter',
+  require 'custom.plugins.tmux-navigator',
 
   'NMAC427/guess-indent.nvim', -- Detect tabstop and shiftwidth automatically
 

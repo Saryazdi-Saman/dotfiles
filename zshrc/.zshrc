@@ -1,7 +1,4 @@
-# Basic env setup
-export EDITOR='nvim'
-export SUDO_EDITOR="$EDITOR"
-
+# Basic setup
 HISTSIZE=10000
 HISTFILE=~/.zsh_history
 SAVEHIST=$HISTSIZE
@@ -12,31 +9,39 @@ setopt autocd notify
 
 unset beep nomatch
 
-# Load zinit if not existant
+# Zinit loader
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
 [ ! -d $ZINIT_HOME ] && mkdir -p "$(dirname $ZINIT_HOME)"
 [ ! -d $ZINIT_HOME/.git ] && git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
 source "${ZINIT_HOME}/zinit.zsh"
 
-# Load completion plugin
-zinit light zsh-users/zsh-completions
+###########
+# Completion
+###########
 
-# Initialize completion system
 autoload -Uz compinit
-compinit
+compinit -C
+zstyle ':completion:*' rehash true
 
-# Syntax & suggestion plugins
-# zinit light zsh-users/zsh-syntax-highlighting
-zinit light zdharma-continuum/fast-syntax-highlighting
-zinit light Aloxaf/fzf-tab
-source <(fzf --zsh)
-zinit light zsh-users/zsh-autosuggestions
+#################
+# Plugins (turbo)
+#################
+
+zinit wait lucid for \
+  zsh-users/zsh-completions \
+  Aloxaf/fzf-tab \
+  zsh-users/zsh-autosuggestions \
+  zdharma-continuum/fast-syntax-highlighting
+
+# fzf bindings (faster than `source <(fzf --zsh)`)
+[ -f /usr/share/fzf/key-bindings.zsh ] && source /usr/share/fzf/key-bindings.zsh
+[ -f /usr/share/fzf/completion.zsh ] && source /usr/share/fzf/completion.zsh
 
 ####################
 ### Key Bindings ###
 ####################
 
-bindkey -e
+bindkey -v
 bindkey '^p' history-search-backward
 bindkey '^n' history-search-forward
 bindkey '^y' autosuggest-accept
@@ -55,14 +60,26 @@ zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
 ### ALIASES ###
 ###############
 
-alias ls='ls --color'
+alias ls='eza --long --color=always --icons=always --no-user'
 alias grep='grep --color'
 alias vim='nvim'
 alias c='clear'
+
+alias nzo="~/.local/bin/zoxide_openfiles_nvim.sh"
 
 ##########################
 ### SHELL INTEGRATIONS ###
 ##########################
 
-eval "$(zoxide init --cmd cd zsh)"
+# if [[ $- == *i* ]] && [[ -z "$TMUX" ]]; then
+#     fastfetch
+# fi
+
+# ------------Zoxide--------------
+eval "$(zoxide init zsh)"
+
+# ------------FZF--------------
+eval "$(fzf --zsh)"
+
+# ------------Starship--------------
 eval "$(starship init zsh)"
