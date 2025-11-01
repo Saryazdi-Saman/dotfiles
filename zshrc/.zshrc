@@ -66,6 +66,7 @@ alias vim='nvim'
 alias c='clear'
 
 alias nzo="~/.local/bin/zoxide_openfiles_nvim.sh"
+alias markdownlint='markdownlint-cli2'
 
 ##########################
 ### SHELL INTEGRATIONS ###
@@ -79,7 +80,32 @@ alias nzo="~/.local/bin/zoxide_openfiles_nvim.sh"
 eval "$(zoxide init zsh)"
 
 # ------------FZF--------------
+# Set up fzf key bindings and fuzzy completion
+export FZF_DEFAULT_COMMAND="fd --hidden --strip-cwd-prefix --exclude .git "
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+export FZF_ALT_C_COMMAND="fd --type=d --hidden --strip-cwd-prefix --exclude .git"
+
+export FZF_DEFAULT_OPTS="--height 50% --layout=default --border --color=hl:#2dd4bf"
+
+# Setup fzf previews
+export FZF_CTRL_T_OPTS="--preview 'bat --color=always -n --line-range :500 {}'"
+export FZF_ALT_C_OPTS="--preview 'eza --icons=always --tree --color=always {} | head -200'"
+
+# fzf preview for tmux
+export FZF_TMUX_OPTS=" -p90%,70% "
+
 eval "$(fzf --zsh)"
+
+# ------------fnm--------------
+eval "$(fnm env --use-on-cd)"
 
 # ------------Starship--------------
 eval "$(starship init zsh)"
+
+# pnpm
+export PNPM_HOME="/home/saman/.local/share/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end

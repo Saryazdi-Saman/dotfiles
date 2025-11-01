@@ -1,1 +1,11 @@
 set selection-clipboard clipboard
+
+# Dark UI
+set default-bg        "#1e1e1e"
+set default-fg        "#c8c8c8"
+
+# Dark recolor mode
+set recolor           true
+set recolor-keephue  true
+set recolor-lightcolor "#1e1e1e"
+set recolor-darkcolor  "#e0e0e0"
